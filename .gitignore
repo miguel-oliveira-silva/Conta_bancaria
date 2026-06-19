@@ -16,3 +16,4 @@ bin/ build/ target/ out/
 # ================================ Arquivos de sistema (Windows / macOS / Linux) ================================
 .DS_Store Thumbs.db ehthumbs.db *.swp
 *.swo
+/.metadata/
