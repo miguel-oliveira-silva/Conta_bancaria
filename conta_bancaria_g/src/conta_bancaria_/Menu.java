@@ -1,4 +1,5 @@
 package conta_bancaria_;
+import conta_bancaria_.util.Cores;
 import java.util.*;
 public class Menu {
 
@@ -7,7 +8,7 @@ public class Menu {
 
 	}
 	public static void menuGrafico() {
-			System.out.printf("**************************************************\n");
+			System.out.printf(Cores.ANSI_BLACK_BACKGROUND+Cores.TEXT_WHITE_BOLD+"**************************************************\n");
 			System.out.println("*\t \t 1 - criar conta \t \t *");
 			System.out.println("*\t \t 2 - listar todas as contas \t *");
 			System.out.println("*\t \t 3 - Buscar contas por número \t *");
@@ -19,29 +20,24 @@ public class Menu {
 			System.out.println("*\t \t 0 - Sair \t \t \t *");
 			System.out.println("*\t \t \t \t \t \t *");
 			System.out.printf("**************************************************\n");
-			System.out.println("Entre com a opção desejada: \t \t ");
+			System.out.println("Entre com a opção desejada: \t \t \t  "+Cores.TEXT_RESET);
 	}
 	public static void selecao() {
 		Scanner teclado = new Scanner(System.in);
 		int i = 0;
 		do {
 			menuGrafico();
-			i = selecao(teclado.nextLine());
+			i = selecao(teclado.nextLine(), teclado);
 			
 		}while(i != 0);
 		teclado.close();
 	}
-	public static int selecao(String valorDigitado) {
-		if(valorDigitado.isEmpty()) {
-			return 1;
-		}
-		char primeiro;
-		primeiro = valorDigitado.charAt(0);
+	public static int selecao(String valorDigitado, Scanner teclado) {
 		int indice = 0;
 		indice = Integer.valueOf(valorDigitado);
 		switch(indice) {
 			case 1:
-				System.out.println("Não implementado");
+				criarConta(teclado);
 				break;
 			case 2:
 				System.out.println("Não implementado");
@@ -71,7 +67,15 @@ public class Menu {
 				break;
 		}
 		return indice;
-		
 	}
-
+	public static void criarConta(Scanner teclado) {
+		//criar objeto conta para o usario e voltar com ela
+	}
+	public static void sobre() {
+		System.out.println("\n*********************************************************");
+		System.out.println("Projeto Desenvolvido por: Miguel Oliveira da Silva");
+		System.out.println("Generation Brasil - miguels1@genstudents.org");
+		System.out.println("github.com/miguel-oliveira-silva");
+		System.out.println("*********************************************************");
+	}
 }
