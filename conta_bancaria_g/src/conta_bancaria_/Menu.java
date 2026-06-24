@@ -1,9 +1,19 @@
 package conta_bancaria_;
 import conta_bancaria_.util.Cores;
+import conta_bancaria_.model.ContaCorrente;
+import conta_bancaria_.model.ContaPoupanca;
 import java.util.*;
 public class Menu {
 
 	public static void main(String[] args) {
+		ContaCorrente c1 = new ContaCorrente(1, 11, 1, "Miguel Oliveira", 1500, 300);
+		ContaPoupanca c2 = new ContaPoupanca(1, 11, 1, "Julia Campos", 3000, 600);
+		c1.visualizar();
+		c1.depositar(5000);
+		c1.visualizar();
+		c2.visualizar();
+		c2.sacar(3000);
+		c2.visualizar();
 		selecao();
 
 	}
