@@ -1,21 +1,17 @@
 package conta_bancaria_;
 import conta_bancaria_.util.Cores;
+import conta_bancaria_.controller.*;
 import conta_bancaria_.model.ContaCorrente;
 import conta_bancaria_.model.ContaPoupanca;
 import java.util.*;
 public class Menu {
-
+	final static Scanner teclado = new Scanner(System.in); 
 	public static void main(String[] args) {
-		ContaCorrente c1 = new ContaCorrente(1, 11, 1, "Miguel Oliveira", 1500, 300);
-		ContaPoupanca c2 = new ContaPoupanca(1, 11, 1, "Julia Campos", 3000, 600);
-		c1.visualizar();
-		c1.depositar(5000);
-		c1.visualizar();
-		c2.visualizar();
-		c2.sacar(3000);
-		c2.visualizar();
+		ContaController contaController = new ContaController();
+		contaController.cadastrar(new ContaCorrente(contaController.gerarNumero(), 456, 1, "Thuany Silva", 1000000.00f, 100000.00f));
+		contaController.cadastrar(new ContaPoupanca(contaController.gerarNumero(), 456, 2, "Marcia Condarco", 1000000.00f, 10));
 		selecao();
-
+		teclado.close();
 	}
 	public static void menuGrafico() {
 			System.out.printf(Cores.ANSI_BLACK_BACKGROUND+Cores.TEXT_WHITE_BOLD+"**************************************************\n");
@@ -33,21 +29,23 @@ public class Menu {
 			System.out.println("Entre com a opção desejada: \t \t \t  "+Cores.TEXT_RESET);
 	}
 	public static void selecao() {
-		Scanner teclado = new Scanner(System.in);
 		int i = 0;
 		do {
 			menuGrafico();
-			i = selecao(teclado.nextLine(), teclado);
-			
+			try {
+			i = selecao(teclado.nextInt());
+			teclado.nextLine();
+			}catch (InputMismatchException e) {
+				i = 0;
+				System.out.println("Digite um número entre 0 e 8");
+				teclado.nextLine();
+			}
 		}while(i != 0);
-		teclado.close();
 	}
-	public static int selecao(String valorDigitado, Scanner teclado) {
-		int indice = 0;
-		indice = Integer.valueOf(valorDigitado);
-		switch(indice) {
+	public static int selecao(int i) {
+		switch(i) {
 			case 1:
-				criarConta(teclado);
+				criarConta();
 				break;
 			case 2:
 				System.out.println("Não implementado");
@@ -78,8 +76,12 @@ public class Menu {
 		}
 		return indice;
 	}
-	public static void criarConta(Scanner teclado) {
+	public static void criarConta() {
 		//criar objeto conta para o usario e voltar com ela
+	}
+	public void keypress(Scanner teclado) {
+		System.out.println("Presssione eter para continuar...");
+		teclado.next();
 	}
 	public static void sobre() {
 		System.out.println("\n*********************************************************");
