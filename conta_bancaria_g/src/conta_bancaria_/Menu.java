@@ -64,19 +64,24 @@ public class Menu {
 				buscarContaPorNumero(numero);
 				break;
 			case 4:
-				System.out.println("Não implementado");
+				atualizarConta();
+				keyPress();
 				break;
 			case 5:
-				System.out.println("Não implementado");
+				deletarConta();
+				keyPress();
 				break;
 			case 6:
-				System.out.println("Não implementado");
+				sacar();
+				keyPress();
 				break;
 			case 7:
-				System.out.println("Não implementado");
+				depositar();
+				keyPress();
 				break;
 			case 8:
-				System.out.println("Não implementado");
+				transferir();
+				keyPress();
 				break;
 			case 0:
 				break;
@@ -87,7 +92,34 @@ public class Menu {
 		return i;
 	}
 	public static void criarConta() {
-		System.out.println();
+		System.out.print("Digite o número da agência: ");
+		int agencia = teclado.nextInt();
+
+		System.out.print("Digite o nome do titular da conta: ");
+		teclado.skip("\\R");
+		String titular = teclado.nextLine();
+
+		System.out.print("Digite o tipo de conta (1 para corrente, 2 para poupança): ");
+		int tipo = teclado.nextInt();
+
+		System.out.print("Digite o saldo da conta: ");
+		float saldo = teclado.nextFloat();
+
+		switch (tipo) {
+		case 1 -> {
+			System.out.print("Digite o limite da conta: ");
+			float limite = teclado.nextFloat();
+			teclado.skip("\\R");
+			contaController.cadastrar(new ContaCorrente(contaController.gerarNumero(), agencia, tipo, titular, saldo, limite));
+		}
+		case 2 -> {
+			System.out.print("Digite o dia de aniversário da conta: ");
+			int diaAniversario = teclado.nextInt();
+			teclado.skip("\\R");
+			contaController.cadastrar(new ContaPoupanca(contaController.gerarNumero(), agencia, tipo, titular, saldo, diaAniversario));
+		}
+		default -> System.out.println(Cores.TEXT_RED + "Tipo de conta inválido." + Cores.TEXT_RESET);
+		}
 	}
 	public static void keyPress() {
 		System.out.println("Presssione eter para continuar...");
@@ -116,7 +148,7 @@ public class Menu {
 				System.out.println("\nOperação cancelada!");
  
 		} else {
-			System.out.printf("\nA conta número %d não foi encontrada!");
+			System.out.printf("\nA conta número %d não foi encontrada!", numero);
 		}
 	}
 	public static void sobre() {
@@ -125,5 +157,95 @@ public class Menu {
 		System.out.println("Generation Brasil - miguels1@genstudents.org");
 		System.out.println("github.com/miguel-oliveira-silva");
 		System.out.println("*********************************************************");
+	}
+	public static void atualizarConta() {
+		System.out.println("Digite o número da conta:");
+		int numero = teclado.nextInt();
+		teclado.nextLine();
+
+		Optional<Conta> conta = contaController.buscarNaCollection(numero);
+
+		if (conta.isPresent()) {
+			int agencia = conta.get().getAgencia();
+			String titular = conta.get().getTitular();
+			int tipo = conta.get().getTipo();
+			float saldo = conta.get().getSaldo();
+
+			System.out.printf("Agência atual: %d", agencia);
+			System.out.println("\nDigite o novo número de agência (ou pressione ENTER para manter o valor atual):");
+			String entrada = teclado.nextLine();
+			agencia = entrada.isEmpty() ? agencia : Integer.parseInt(entrada);
+
+			System.out.printf("Titular atual: %s", titular);
+			System.out.println("\nDigite o novo nome do titular (ou pressione ENTER para manter o valor atual):");
+			entrada = teclado.nextLine();
+			titular = entrada.isEmpty() ? titular : entrada.trim();
+
+			System.out.printf("Saldo atual: %.2f", saldo);
+			System.out.println("\nDigite o novo valor do saldo (ou pressione ENTER para manter o valor atual):");
+			entrada = teclado.nextLine();
+			saldo = entrada.isEmpty() ? saldo : Float.parseFloat(entrada.replace(",", "."));
+
+			switch (tipo) {
+				case 1 -> {
+					ContaCorrente contaCorrente = (ContaCorrente) conta.get();
+					float limite = contaCorrente.getLimite();
+					System.out.printf("\nLimite atual: %.2f", limite);
+					System.out.println("\nDigite o novo valor do limite (ou pressione ENTER para manter o valor atual):");
+					entrada = teclado.nextLine();
+					limite = entrada.isEmpty() ? limite : Float.parseFloat(entrada.replace(",", "."));
+					contaController.atualizar(new ContaCorrente(numero, agencia, tipo, titular, saldo, limite));
+				}
+				case 2 -> {
+					ContaPoupanca contaPoupanca = (ContaPoupanca) conta.get();
+					int diaAniversario = contaPoupanca.getAniversario();
+					System.out.printf("\nAniversário atual: %d", diaAniversario);
+					System.out.println("\nDigite o novo dia de aniversário da conta (ou pressione ENTER para manter o valor atual):");
+					entrada = teclado.nextLine();
+					diaAniversario = entrada.isEmpty() ? diaAniversario : Integer.parseInt(entrada);
+					contaController.atualizar(new ContaPoupanca(numero, agencia, tipo, titular, saldo, diaAniversario));
+				}
+				default -> System.out.println(Cores.TEXT_RED + "Tipo de conta inválido!" + Cores.TEXT_RESET);
+			}
+		} else {
+			System.out.printf("\nA conta número %d não foi encontrada.", numero);
+		}
+	}
+	public static void sacar() {
+		System.out.println("Digite o número da conta:");
+		int numero = teclado.nextInt();
+
+		System.out.print("Digite o valor do saque: ");
+		float valor = teclado.nextFloat();
+
+		contaController.sacar(numero, valor);
+	}
+	public static void depositar() {
+		System.out.println("Digite o número da conta:");
+		int numero = teclado.nextInt();
+
+		System.out.print("Digite o valor do depósito: ");
+		float valor = teclado.nextFloat();
+
+		contaController.depositar(numero, valor);
+	}
+	public static void transferir() {
+		System.out.println("Digite o número da conta de origem:");
+		int numeroOrigem = teclado.nextInt();
+
+		System.out.println("Digite o número da conta de destino:");
+		int numeroDestino = teclado.nextInt();
+
+		System.out.print("Digite o valor da transferência: ");
+		float valor = teclado.nextFloat();
+		teclado.nextLine();
+
+		contaController.transferir(numeroOrigem, numeroDestino, valor);
+	}
+	public static void listarPorTitular() {
+		System.out.print("Digite o nome do titular da conta: ");
+		String titular = teclado.nextLine();
+
+		contaController.listarPorTitular(titular);
 	}
 }

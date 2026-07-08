@@ -3115,3 +3115,72 @@ java.lang.NoClassDefFoundError: org/eclipse/m2e/core/ui/internal/project/OutOfDa
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 Caused by: java.lang.ClassNotFoundException: An error occurred while automatically activating bundle org.eclipse.m2e.core.ui (363).
 	... 10 more
+
+!ENTRY org.eclipse.mylyn.tasks.ui 2 0 2026-07-07 23:37:34.588
+!MESSAGE No search provider was registered. Tasks search is not available.
+
+!ENTRY org.eclipse.core.resources 4 2 2026-07-07 23:46:24.181
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 0
+java.lang.NoClassDefFoundError: org/eclipse/m2e/core/ui/internal/project/OutOfDateConfigurationDeltaVisitor
+	at org.eclipse.m2e.core.ui.internal.project.MavenUpdateConfigurationChangeListener.resourceChanged(MavenUpdateConfigurationChangeListener.java:49)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:342)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:331)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:185)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:473)
+	at org.eclipse.core.internal.resources.Workspace.endOperation(Workspace.java:1619)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:51)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: java.lang.ClassNotFoundException: An error occurred while automatically activating bundle org.eclipse.m2e.core.ui (363).
+	... 9 more
+
+!ENTRY org.eclipse.core.resources 4 2 2026-07-07 23:46:24.754
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 0
+java.lang.NoClassDefFoundError: org/eclipse/m2e/core/ui/internal/project/OutOfDateConfigurationDeltaVisitor
+	at org.eclipse.m2e.core.ui.internal.project.MavenUpdateConfigurationChangeListener.resourceChanged(MavenUpdateConfigurationChangeListener.java:49)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:342)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:331)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:185)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:473)
+	at org.eclipse.core.internal.resources.Workspace.endOperation(Workspace.java:1619)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:223)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:309)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: java.lang.ClassNotFoundException: An error occurred while automatically activating bundle org.eclipse.m2e.core.ui (363).
+	... 10 more
+
+!ENTRY org.eclipse.core.resources 4 2 2026-07-07 23:50:17.061
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 0
+java.lang.NoClassDefFoundError: org/eclipse/m2e/core/ui/internal/project/OutOfDateConfigurationDeltaVisitor
+	at org.eclipse.m2e.core.ui.internal.project.MavenUpdateConfigurationChangeListener.resourceChanged(MavenUpdateConfigurationChangeListener.java:49)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:342)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:331)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:185)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:473)
+	at org.eclipse.core.internal.resources.Workspace.endOperation(Workspace.java:1619)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:51)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: java.lang.ClassNotFoundException: An error occurred while automatically activating bundle org.eclipse.m2e.core.ui (363).
+	... 9 more
+
+!ENTRY org.eclipse.core.resources 4 2 2026-07-07 23:50:17.257
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 0
+java.lang.NoClassDefFoundError: org/eclipse/m2e/core/ui/internal/project/OutOfDateConfigurationDeltaVisitor
+	at org.eclipse.m2e.core.ui.internal.project.MavenUpdateConfigurationChangeListener.resourceChanged(MavenUpdateConfigurationChangeListener.java:49)
+	at org.eclipse.core.internal.events.NotificationManager$1.run(NotificationManager.java:342)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.core.internal.events.NotificationManager.notify(NotificationManager.java:331)
+	at org.eclipse.core.internal.events.NotificationManager.broadcastChanges(NotificationManager.java:185)
+	at org.eclipse.core.internal.resources.Workspace.broadcastPostChange(Workspace.java:473)
+	at org.eclipse.core.internal.resources.Workspace.endOperation(Workspace.java:1619)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:223)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:309)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: java.lang.ClassNotFoundException: An error occurred while automatically activating bundle org.eclipse.m2e.core.ui (363).
+	... 10 more
