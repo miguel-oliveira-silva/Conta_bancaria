@@ -1,13 +1,14 @@
 package conta_bancaria_;
 import conta_bancaria_.util.Cores;
 import conta_bancaria_.controller.*;
+import conta_bancaria_.model.Conta;
 import conta_bancaria_.model.ContaCorrente;
 import conta_bancaria_.model.ContaPoupanca;
 import java.util.*;
 public class Menu {
 	final static Scanner teclado = new Scanner(System.in); 
+	static ContaController contaController = new ContaController();
 	public static void main(String[] args) {
-		ContaController contaController = new ContaController();
 		contaController.cadastrar(new ContaCorrente(contaController.gerarNumero(), 456, 1, "Thuany Silva", 1000000.00f, 100000.00f));
 		contaController.cadastrar(new ContaPoupanca(contaController.gerarNumero(), 456, 2, "Marcia Condarco", 1000000.00f, 10));
 		selecao();
@@ -48,10 +49,19 @@ public class Menu {
 				criarConta();
 				break;
 			case 2:
-				System.out.println("Não implementado");
+				contaController.listarTodas();
+				keyPress();
 				break;
 			case 3:
-				System.out.println("Não implementado");
+				int numero = 0;
+				System.out.println("Digite número da conta: ");
+				try {
+					numero = teclado.nextInt();
+					teclado.next();
+				} catch (Exception e) {
+					System.out.println("Digite um número.");
+				}
+				buscarContaPorNumero(numero);
 				break;
 			case 4:
 				System.out.println("Não implementado");
@@ -74,14 +84,40 @@ public class Menu {
 				System.out.println("Invalido");
 				break;
 		}
-		return indice;
+		return i;
 	}
 	public static void criarConta() {
-		//criar objeto conta para o usario e voltar com ela
+		System.out.println();
 	}
-	public void keypress(Scanner teclado) {
+	public static void keyPress() {
 		System.out.println("Presssione eter para continuar...");
 		teclado.next();
+	}
+	public static void buscarContaPorNumero(int numero){
+		contaController.procurarPorNumero(numero);
+	}
+	public static void deletarConta() {
+		System.out.println("Digite o número da conta: ");
+		int numero = teclado.nextInt();
+		teclado.nextLine();
+ 
+		Optional<Conta> conta = contaController.buscarNaCollection(numero);
+ 
+		if (conta.isPresent()) {
+ 
+			// confirmar exclusão
+			System.out.printf("\nTem certeza que você deseja excluir a conta número %d? (S/N)", numero);
+			String confirmacao = teclado.nextLine();
+ 
+			if (confirmacao.equalsIgnoreCase("S"))
+				contaController.deletar(numero);
+ 
+			else
+				System.out.println("\nOperação cancelada!");
+ 
+		} else {
+			System.out.printf("\nA conta número %d não foi encontrada!");
+		}
 	}
 	public static void sobre() {
 		System.out.println("\n*********************************************************");
